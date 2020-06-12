@@ -268,7 +268,7 @@
 
         function ShowResult() {
             console.log(sum);
-            $("#result").text('总共移动次数: ' + sum + ' \n 平均寻道长度: ' + sum / array.length);
+            $("#result").text('总共移动道数: ' + sum + ' \n 平均寻道长度: ' + sum / array.length);
         }
 
         // 一分钟快排
@@ -377,6 +377,8 @@
             QuickSort(tmparray, 0, tmparray.length - 1);
             for (let i = 0; i < tmparray.length; i++) {
                 if (start > tmparray[i]) {
+                    index = i + 1;
+                } else if (start == tmparray[i]) {
                     index = i;
                 }
             }
@@ -402,6 +404,8 @@
             QuickSort(tmparray, 0, tmparray.length - 1);
             for (let i = 0; i < tmparray.length; i++) {
                 if (start > tmparray[i]) {
+                    index = i + 1;
+                } else if (start == tmparray[i]) {
                     index = i;
                 }
             }
@@ -424,6 +428,9 @@
             QuickSort(tmparray, st, ed - 1);
             for (let i = st; i < ed; i++) {
                 if (last > tmparray[i]) {
+                    index = i + 1;
+                }
+                else if(start == tmparray[i]) {
                     index = i;
                 }
             }
@@ -444,7 +451,7 @@
         function NSCAN(N) {
             let tmparray = array.slice();
             let index = 0;
-            let num = parseInt(tmparray.length / N + 0.5);
+            //let num = parseInt(tmparray.length / N + 0.5);
             let last = start;
             while (index != tmparray.length) {
                 if (index + N <= tmparray.length) {
@@ -460,8 +467,9 @@
 
         function FSCAN() {
             alert(
-                '事实上，此算法就是使用两个队列存储，新来的请求放入当前不在执行的队列，此处不好做演示，\n因为如果不采用异步方法加载新的请求，效果看起来很像普通的SCAN，而js的模型是单线程的，如果采用多线程，肯定需要worker，涉及到很多困难的部分，所以现在仍在想办法解决'
+                '事实上，此算法就是使用两个队列存储，新来的请求放入当前不在执行的队列，本身就是对两个队列分别执行SCAN算法，演示时无非就是再执行一次SCAN算法'
             );
+            SCAN();
         }
 
         $('#btn').click(() => {
