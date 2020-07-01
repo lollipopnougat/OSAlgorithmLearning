@@ -339,6 +339,11 @@
                 let left = index - 1;
                 let right = index + 1;
                 let last = start;
+                if (tmparray[right] - last < last - tmparray[index]) {
+                    index = right;
+                    left = index - 1;
+                    right = index + 1;
+                }
                 while (left >= -1 || right <= tmparray.length) {
                     MoveBar(tmparray[index], 500, true);
                     sum += Math.abs(last - tmparray[index]);
